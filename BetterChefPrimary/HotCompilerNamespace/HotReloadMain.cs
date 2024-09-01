@@ -24,7 +24,7 @@ namespace HotCompilerNamespace
 
             {
                 var methodToReload = typeof(BetterDice).GetMethod(nameof(BetterDice.OnEnter), allFlags);
-                var newMethod = typeof(HotReloadMain).GetMethod(nameof(ModifiedGolemFireLaserOnEnter), allFlags);
+                var newMethod = typeof(HotReloadMain).GetMethod(nameof(BetterDiceOnEnterHotReloaded), allFlags);
                 new Hook(methodToReload, newMethod);
             }
         }
@@ -43,7 +43,7 @@ namespace HotCompilerNamespace
             cursor.Emit(OpCodes.Call, typeof(BaseState).GetMethod(nameof(BaseState.OnEnter), allFlags));
         }
 
-        private static void ModifiedGolemFireLaserOnEnter(BetterDice self)
+        private static void BetterDiceOnEnterHotReloaded(BetterDice self)
         {
             self.CacheOriginalFields();
 
