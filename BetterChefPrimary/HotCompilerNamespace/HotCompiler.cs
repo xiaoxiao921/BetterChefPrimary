@@ -21,17 +21,33 @@ namespace HotCompilerNamespace
 
             var ass = CompileString(
                 File.ReadAllText(pathToHotReloadMain));
+
+            if (ass == null)
+            {
+                Log.Error($"Failed hot compiling assembly");
+                return;
+            }
+
             var entryPoint = ass.GetTypes()
            .SelectMany(t => t.GetMethods(allFlags))
            .FirstOrDefault(m => m.Name == nameof(HotReloadMain.HotReloadEntryPoint));
 
+            if (entryPoint == null)
+            {
+                Log.Error($"Failed getting entrypoint");
+                return;
+            }
+
             var res = entryPoint.Invoke(null, null);
+
             Log.Info($"CompilationCount: {CompilationCount++}");
         }
 
         public static Module CompileString(string code)
         {
-            CSharpParseOptions options = CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp9);
+            CSharpParseOptions options = CSharpParseOptions.Default.
+                WithLanguageVersion(LanguageVersion.Latest).
+                WithPreprocessorSymbols("DEBUG");
             SyntaxTree tree = CSharpSyntaxTree.ParseText(code, options);
 
             CSharpCompilationOptions compilationOptions = new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary,
