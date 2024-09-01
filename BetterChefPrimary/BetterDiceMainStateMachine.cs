@@ -8,24 +8,26 @@ namespace BetterChefPrimary
     {
         public const string EntityStateMachineCustomName = "IDEATHHD_BETTERCHEFPRIMARY_ESM";
 
-        public List<CleaverProjectile> ActiveCleavers = [];
+        private List<CleaverProjectile> _activeCleavers = [];
+
+        public void AddCleaver(CleaverProjectile cleaverProjectile)
+        {
+            _activeCleavers.Add(cleaverProjectile);
+        }
 
         public override void FixedUpdate()
         {
             base.FixedUpdate();
 
-            if (isAuthority)
+            for (int i = _activeCleavers.Count - 1; i >= 0; i--)
             {
-                for (int i = ActiveCleavers.Count - 1; i >= 0; i--)
+                var cleaver = _activeCleavers[i];
+                if (cleaver)
                 {
-                    var cleaver = ActiveCleavers[i];
-                    if (cleaver)
+                    if (cleaver.NetworkboomerangState == CleaverProjectile.BoomerangState.Stopped)
                     {
-                        if (cleaver.boomerangState == CleaverProjectile.BoomerangState.Stopped)
-                        {
-                            cleaver.boomerangState = CleaverProjectile.BoomerangState.FlyBack;
-                            ActiveCleavers.RemoveAt(i);
-                        }
+                        cleaver.NetworkboomerangState = CleaverProjectile.BoomerangState.FlyBack;
+                        _activeCleavers.RemoveAt(i);
                     }
                 }
             }

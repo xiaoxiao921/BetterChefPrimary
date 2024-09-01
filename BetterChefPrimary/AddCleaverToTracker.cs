@@ -8,13 +8,13 @@ namespace BetterChefPrimary
     {
         public void Start()
         {
-            var esm = EntityStateMachine.
-                FindByCustomName(
-                this.GetComponent<ProjectileController>().owner,
-                BetterDiceMainStateMachine.EntityStateMachineCustomName);
-            if (esm && esm.state != null && esm.state is BetterDiceMainStateMachine betterDiceEsm)
+            var esm = EntityStateMachine.FindByCustomName(
+                GetComponent<ProjectileController>().owner,
+                BetterDiceMainStateMachine.EntityStateMachineCustomName
+            );
+            if (esm && esm.state != null && esm.state is BetterDiceMainStateMachine betterDiceEsm && betterDiceEsm.isAuthority)
             {
-                betterDiceEsm.ActiveCleavers.Add(this.GetComponent<CleaverProjectile>());
+                betterDiceEsm.AddCleaver(GetComponent<CleaverProjectile>());
             }
         }
     }
