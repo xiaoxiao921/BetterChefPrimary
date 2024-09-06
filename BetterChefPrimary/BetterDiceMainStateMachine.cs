@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using EntityStates;
 using RoR2.Projectile;
+using RoR2.Skills;
 
 namespace BetterChefPrimary
 {
@@ -19,6 +20,11 @@ namespace BetterChefPrimary
         {
             base.FixedUpdate();
 
+            if (this.skillLocator.primary.skillDef != ChefSkillDefs.BetterPrimary)
+            {
+                return;
+            }
+
             for (int i = _activeCleavers.Count - 1; i >= 0; i--)
             {
                 var cleaver = _activeCleavers[i];
@@ -31,6 +37,11 @@ namespace BetterChefPrimary
                     }
                 }
             }
+        }
+
+        public static class ChefSkillDefs
+        {
+            public static SkillDef BetterPrimary;
         }
     }
 }

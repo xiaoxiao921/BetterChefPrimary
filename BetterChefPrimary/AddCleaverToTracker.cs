@@ -4,6 +4,10 @@ using UnityEngine;
 
 namespace BetterChefPrimary
 {
+    /// <summary>
+    /// Component attached to the Cleaver projectile.
+    /// Trace back to the owner gameobject and add the cleaver instance to the tracker, which is handled by a custom entity state machine (attached to the chef body)
+    /// </summary>
     public class AddCleaverToTracker : MonoBehaviour
     {
         public void Start()

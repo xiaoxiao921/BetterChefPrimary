@@ -7,6 +7,7 @@ using RoR2;
 using RoR2.Skills;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using static BetterChefPrimary.BetterDiceMainStateMachine;
 
 namespace BetterChefPrimary
 {
@@ -18,7 +19,7 @@ namespace BetterChefPrimary
         public const string PluginGUID = PluginAuthor + "." + PluginName;
         public const string PluginAuthor = "iDeathHD";
         public const string PluginName = "BetterChefPrimary";
-        public const string PluginVersion = "1.0.0";
+        public const string PluginVersion = "1.0.2";
 
         internal static void AddBetterPrimary()
         {
@@ -68,6 +69,8 @@ namespace BetterChefPrimary
                     skillDef = skillDef,
                     viewableNode = new ViewablesCatalog.Node(skillDef.skillNameToken, false)
                 });
+
+                ChefSkillDefs.BetterPrimary = skillDef;
             }
 
             // esm for tracking cleavers
