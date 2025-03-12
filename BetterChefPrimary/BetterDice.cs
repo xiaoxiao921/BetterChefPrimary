@@ -121,7 +121,7 @@ namespace BetterChefPrimary
                     fireProjectileInfo.rotation = Util.QuaternionSafeLookRotation(aimRay.direction) * rhs;
                     fireProjectileInfo.owner = base.gameObject;
                     fireProjectileInfo.damage = this.damageStat * this.damageCoefficient;
-                    fireProjectileInfo.damageTypeOverride = new DamageTypeCombo?(DamageType.Generic);
+                    fireProjectileInfo.damageTypeOverride = new DamageTypeCombo?(DamageTypeCombo.GenericPrimary);
                     fireProjectileInfo.force = this.force;
                     fireProjectileInfo.crit = Util.CheckRoll(this.critStat, base.characterBody.master);
                     if (!NetworkServer.active && this.chefController)

@@ -19,7 +19,7 @@ namespace BetterChefPrimary
         public const string PluginGUID = PluginAuthor + "." + PluginName;
         public const string PluginAuthor = "iDeathHD";
         public const string PluginName = "BetterChefPrimary";
-        public const string PluginVersion = "1.0.2";
+        public const string PluginVersion = "1.0.3";
 
         internal static void AddBetterPrimary()
         {
